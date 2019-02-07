@@ -20,13 +20,13 @@ const Lastrow = (props) => {
 
     return <>
         <Col md="6" style={{ padding: '0px' }}>
-            <Button color="primary" style={styleOne} onClick={props.handleClick}>0</Button>{' '}
+            <Button style={styleOne} onClick={props.handleClick}>0</Button>{' '}
         </Col>
         <Col md="3" style={{ padding: '0px' }}>
-            <Button color="primary" style={styleOne} onClick={props.handleClick}>.</Button>{' '}
+            <Button style={styleOne} onClick={props.handleClick}>.</Button>{' '}
         </Col>
         <Col md="3" style={{ padding: '0px' }}>
-            <Button color="primary" style={styleTwo} onClick={props.handleClick}>=</Button>{' '}
+            <Button style={styleTwo} onClick={props.handleClick}>=</Button>{' '}
         </Col>
     </>
 

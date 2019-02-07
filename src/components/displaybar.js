@@ -9,6 +9,7 @@ const Displaybar = props => {
         'textAlign': 'right', 
         'minHeight':'120px'
     }
+
     return <Col md="12" style={{padding:'0px'}}>
             <Input placeholder={props.displayValue} style={style} readOnly></Input>{' '}
         </Col>

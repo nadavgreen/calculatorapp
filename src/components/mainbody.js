@@ -19,19 +19,19 @@ const Mainbody = (props) => {
         'borderBottom': '1px solid #666'
     };
 
-    const grey = (e) => {
-        return <Col md="3" style={{ padding: '0px' }}>
+    const grey = (e, i) => {
+        return <Col md="3" style={{ padding: '0px' }} key={i}>
             <Button style={greyBox} onClick={props.handleClick}>{e}</Button>{' '}
         </Col>;
     };
 
-    const orange = (e) => {
-        return <Col md="3" style={{ padding: '0px' }}>
+    const orange = (e, i) => {
+        return <Col md="3" style={{ padding: '0px' }} key={i}>
             <Button style={orangeBox} onClick={props.handleClick}>{e}</Button>{' '}
         </Col>;
     };
 
-    return arr.map((e, i) => (i+1) % 4 ? grey(e) : orange(e));
+    return arr.map((e, i) => (i+1) % 4 ? grey(e, i) : orange(e, i));
 
 };
 
