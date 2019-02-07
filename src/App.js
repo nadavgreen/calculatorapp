@@ -71,7 +71,7 @@ class App extends Component {
         <Container style={{'width': '50%'}}>
           <Row>
             <Displaybar displayValue={this.state.displayValue}/>
-            <Mainbody displayValue={this.state.displayValue} handleClick={this.handleClick}/>
+            <Mainbody handleClick={this.handleClick}/>
             <Lastrow handleClick={this.handleClick}/>
           </Row>
         </Container>
