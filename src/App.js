@@ -42,6 +42,22 @@ const addDecimal = (string) => {
 
 }
 
+const division = (display, previous) => {
+  return parseFloat(previous) / parseFloat(display)
+}
+
+const multiplication = (display, previous) => {
+  return parseFloat(previous) * parseFloat(display)
+}
+
+const subtraction = (display, previous) => {
+  return parseFloat(previous) - parseFloat(display)
+}
+
+const addition = (display, previous) => {
+  return parseFloat(previous) + parseFloat(display)
+}
+
 // Helper Function
 
 const removeZero = (string) => {
@@ -80,33 +96,49 @@ class App extends Component {
       '+': '+',
     }
 
+    this.arithmetic = {
+      '÷': division,
+      'x': multiplication,
+      '-': subtraction,
+      '+': addition,
+    }
     
   }
 
 
   handleClick = e => {
     // Handle AC / C button change
-    if (!this.functions[e.target.innerText] && !this.operations[e.target.innerText]){
+    if (!this.functions[e.target.innerText] && !this.arithmetic[e.target.innerText]){
       this.setState({clear:false})
     } else if (e.target.innerText === 'C') {
-      this.setState({clear:true})
+      this.setState({displayValue: '0',
+      previousValue: null,
+      operation: null,
+      waitingForNewValue: false,
+      clear: true,})
     }
 
     // Handle Functions and Operations
     if (!this.functions[e.target.innerText] && !this.operations[e.target.innerText] && this.state.waitingForNewValue === true){
       this.setState({displayValue: removeZero(e.target.innerText), waitingForNewValue: false})
       console.log('1')
-    } else if (!this.functions[e.target.innerText] && !this.operations[e.target.innerText]){
+    } else if (!this.functions[e.target.innerText] && !this.arithmetic[e.target.innerText]){
       this.setState({displayValue: removeZero(this.state.displayValue+e.target.innerText)})
       console.log('2')
     } else if (this.functions[e.target.innerText]) {
       this.setState({displayValue: this.functions[e.target.innerText](this.state.displayValue, this.state.previousValue, this.operations[this.state.operation])})
       console.log('3')
-    } else if (this.operations[e.target.innerText]) {
-      this.setState({operation: e.target.innerText, previousValue: this.state.displayValue, waitingForNewValue: true,})
+    } else if (this.arithmetic[e.target.innerText] && this.state.previousValue !== null && this.state.waitingForNewValue === true) {
+      this.setState({operation: e.target.innerText, displayValue: this.arithmetic[e.target.innerText](this.state.displayValue, this.state.previousValue), previousValue: this.state.displayValue, waitingForNewValue: false,})
       console.log('4')
+    } else if (this.arithmetic[e.target.innerText]) {
+      this.setState({operation: e.target.innerText, previousValue: this.state.displayValue, waitingForNewValue: true,})
+      console.log('5')
     }
-    console.log('waiting', this.state.waitingForNewValue)
+    console.log(e.target.innerText)
+    console.log(this.state.operation)
+    console.log(this.state.previousValue)
+    
   }
 
   render() {
